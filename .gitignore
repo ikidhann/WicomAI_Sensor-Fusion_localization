@@ -1,0 +1,45 @@
+# Build artifacts
+build/
+install/
+log/
+.ros/
+.pytest_cache/
+
+# Python-specific
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+venv/
+.venv/
+
+# C++-specific
+*.o
+*.lo
+*.la
+*.so
+*.a
+*.lib
+*.dll
+*.exp
+*.ilk
+*.pdb
+*.obj
+*.exe
+
+# Eclipse/CDT
+.project
+.cproject
+.settings/
+
+# VS Code
+.vscode/
+
+# Other common temporary files
+*~
+*.bak
+*.swp
+*.swo
+*.tmp
+*.log
+*.DS_Store

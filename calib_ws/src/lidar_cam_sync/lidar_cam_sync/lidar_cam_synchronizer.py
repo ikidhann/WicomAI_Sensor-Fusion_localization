@@ -3,13 +3,13 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image, PointCloud2
 import message_filters
 
-
+# TODO: Need to create a new Node to project point clouds to the image
 class LidarCameraSynchronizer(Node):
     def __init__(self):
         super().__init__('lidar_camera_sync_node')
         self.lidar_sub_ = message_filters.Subscriber(self, PointCloud2,'/velodyne_points')
 
-        self.cam_sub_ = message_filters.Subscriber(self, Image, '/camera/raw_image') # TODO: check this
+        self.cam_sub_ = message_filters.Subscriber(self, Image, '/camera/raw_image')
 
         # Publishers for viewing synchronized messages
         self.sync_raw_img_pub_ = self.create_publisher(Image, "/sync/raw_image", 10)

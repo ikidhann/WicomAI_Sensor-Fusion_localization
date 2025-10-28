@@ -44,3 +44,4 @@ venv/
 *.log
 *.DS_Store
 bags/
+bags_preprocessed/

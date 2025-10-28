@@ -1,0 +1,3 @@
+[submodule "koide3/direct_visual_lidar_calibration"]
+	path = koide3/direct_visual_lidar_calibration
+	url = https://github.com/koide3/direct_visual_lidar_calibration.git

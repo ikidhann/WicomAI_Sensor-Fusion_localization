@@ -8,11 +8,12 @@ docker run \
   --net host \
   --gpus all \
   -e DISPLAY=$DISPLAY \
+  -e __GLX_VENDOR_LIBRARY_NAME=nvidia \
   -v $HOME/.Xauthority:/root/.Xauthority \
   -v $bag_path:/tmp/input_bags \
   -v $preprocessed_path:/tmp/preprocessed \
   koide3:jazzy \
-  ros2 run direct_visual_lidar_calibration preprocess -d \
+  ros2 run direct_visual_lidar_calibration preprocess -dv \
     --image_topic /sync/raw_image \
     --points_topic /sync/velodyne_points \
     --camera_info_topic /camera/cam_info \
@@ -55,10 +56,11 @@ docker run \
   --net host \
   --gpus all \
   -e DISPLAY=$DISPLAY \
+  -e __GLX_VENDOR_LIBRARY_NAME=nvidia \
   -v $HOME/.Xauthority:/root/.Xauthority \
   -v $preprocessed_path:/tmp/preprocessed \
   koide3:jazzy \
-  ros2 run direct_visual_lidar_calibration calibrate /tmp/preprocessed
+  ros2 run direct_visual_lidar_calibration calibrate --background /tmp/preprocessed 
 
 # Result inspection
 docker run \

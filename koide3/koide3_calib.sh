@@ -1,4 +1,4 @@
-bag_path=/home/wicomai-cv/Documents/sensor_fusion/ros2-drone-localization/bags/rosbag2_2025_10_23-22_40_30
+bag_path=/home/wicomai-cv/Documents/sensor_fusion/ros2-drone-localization/bags/bag_2510291931
 preprocessed_path=/home/wicomai-cv/Documents/sensor_fusion/ros2-drone-localization/bags_preprocessed
 docker build -t koide3:jazzy -f docker/jazzy/Dockerfile_with_superglue .
 
@@ -16,7 +16,7 @@ docker run \
     --image_topic /sync/raw_image \
     --points_topic /sync/velodyne_points \
     --camera_info_topic /camera/cam_info \
-    /tmp/input_bags /tmp/preprocessed 
+    /tmp/input_bags /tmp/preprocessed
 
 # Initial guess
 # docker run \
@@ -37,7 +37,7 @@ docker run \
   -v $HOME/.Xauthority:/root/.Xauthority \
   -v $preprocessed_path:/tmp/preprocessed \
   koide3:jazzy \
-  ros2 run direct_visual_lidar_calibration find_matches_superglue.py /tmp/preprocessed --rotate_camera 90
+  ros2 run direct_visual_lidar_calibration find_matches_superglue.py /tmp/preprocessed --superglue indoor
 
 docker run \
   --rm \

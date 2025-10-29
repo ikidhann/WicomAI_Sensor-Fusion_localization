@@ -19,28 +19,29 @@ import numpy as np
 
 class CameraPublisher(Node):
     def __init__(self):
-        super().__init__('came_publisher_node')
+        super().__init__('cam_publisher_node')
         self.declare_parameter('cam_source', 0)
         self.declare_parameter('frame_width', 1920)
         self.declare_parameter('frame_height', 1080)
         self.declare_parameter('fps', 30.0)
-        self.declare_parameter('intrinsics_params.distortion_model', 'plumb_bob')
-        self.declare_parameter('intrinsics_params.distortion_coeff', [0])
-        self.declare_parameter('intrinsics_params.camera_matrix', [0])
-        self.declare_parameter('intrinsics_params.rectification_matrix', [0])
-        self.declare_parameter('intrinsics_params.projection_matrix', [0])        
+        self.declare_parameter('intrinsics_param.distortion_model', 'plumb_bob')
+        self.declare_parameter('intrinsics_param.distortion_coeff', [0.0])
+        self.declare_parameter('intrinsics_param.camera_matrix', [0.0])
+        self.declare_parameter('intrinsics_param.rectification_matrix', [0.0])
+        self.declare_parameter('intrinsics_param.projection_matrix', [0.0])        
         
         # Get all params
-        self.cam_source_ = self.get_parameter('cam_source').get_parameter_value().integer_value
-        self.frame_width_ = self.get_parameter('frame_width').get_parameter_value().integer_value
-        self.frame_height_ = self.get_parameter('frame_height').get_parameter_value().integer_value
-        self.fps_ = self.get_parameter('fps').get_parameter_value().double_value
-        self.intrinsics_params_ = {}
-        self.intrinsics_params_['distortion_model'] = self.get_parameter('intrinsics_params.distortion_model').get_parameter_value().string_value
-        self.intrinsics_params_['D'] = self.get_parameter('intrinsics_params.distortion_coeff').get_parameter_value().double_array_value
-        self.intrinsics_params_['K'] = self.get_parameter('intrinsics_params.camera_matrix').get_parameter_value().double_array_value
-        self.intrinsics_params_['R'] = self.get_parameter('intrinsics_params.rectification_matrix').get_parameter_value().double_array_value
-        self.intrinsics_params_['P'] = self.get_parameter('intrinsics_params.projection_matrix').get_parameter_value().double_array_value
+        self.fps_ = self.get_parameter('fps').value
+        self.cam_source_ = self.get_parameter('cam_source').value
+        self.frame_width_ = self.get_parameter('frame_width').value
+        self.frame_height_ = self.get_parameter('frame_height').value
+        self.intrinsics_param_ = {}
+        self.intrinsics_param_['distortion_model'] = self.get_parameter('intrinsics_param.distortion_model').value
+        self.intrinsics_param_['D'] = self.get_parameter('intrinsics_param.distortion_coeff').value
+        self.intrinsics_param_['K'] = self.get_parameter('intrinsics_param.camera_matrix').value
+        self.intrinsics_param_['R'] = self.get_parameter('intrinsics_param.rectification_matrix').value
+        self.intrinsics_param_['P'] = self.get_parameter('intrinsics_param.projection_matrix').value
+        self.get_logger().info(str(self.intrinsics_param_))
 
 
         self.raw_img_pub_ = self.create_publisher(Image, '/camera/raw_image', 10)
@@ -61,20 +62,20 @@ class CameraPublisher(Node):
         cam_info = CameraInfo()
         cam_info.width = self.frame_width_
         cam_info.height = self.frame_height_
-        cam_info.k = self.intrinsics_params_['K']
-        cam_info.r = self.intrinsics_params_['R']
-        cam_info.p = self.intrinsics_params_['P']
-        cam_info.d = self.intrinsics_params_['D']
-        cam_info.distortion_model = self.intrinsics_params_['distortion_model']
+        cam_info.k = self.intrinsics_param_['K']
+        cam_info.r = self.intrinsics_param_['R']
+        cam_info.p = self.intrinsics_param_['P']
+        cam_info.d = self.intrinsics_param_['D']
+        cam_info.distortion_model = self.intrinsics_param_['distortion_model']
         
         return cam_info
     
     def timer_callback(self):
         ret, frame = self.cap.read()
         resize_dim = (self.frame_width_, self.frame_height_)
-        frame = cv2.resize(frame, resize_dim)
 
         if ret:
+            frame = cv2.resize(frame, resize_dim)
             msg_id = f"{self.i}"
             
             raw_image_msg = self.bridge.cv2_to_imgmsg(frame,'bgr8')

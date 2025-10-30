@@ -16,7 +16,7 @@ ros_launch_lidar_sync
 ros2 bag record -o "$rosbag_record_path" [topics: /sync/raw_image /sync/velodyne_points /camera/cam_info]
 
 
-#3. Find calib params, please refer to koide3_calib.sh
+# 3. Find calib params, please refer to koide3_calib.sh
 
 #setup the path variables (bag_path and preprocessed_path)
 bag_path=/home/wicomai-cv/Documents/sensor_fusion/ros2-drone-localization/bags/bag_2510291931

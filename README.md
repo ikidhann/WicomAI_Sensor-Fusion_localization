@@ -4,10 +4,10 @@
 cd /Documents/sensor_fusion/ros2-drone-localization/calib_ws # --> ROS2 workspace 
 colcon build # --> if needed
 
-# goto to byobu / tmux terminal, source for each terminal
+- go to byobu / tmux terminal, source for each terminal
 source setup.sh 
 
-# launch the lidar and cam node
+- launch the lidar and cam node
 ros_launch_velodyne
 ros_launch_lidar_sync
 

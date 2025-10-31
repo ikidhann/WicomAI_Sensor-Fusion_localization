@@ -71,5 +71,11 @@ docker run \
   -v $HOME/.Xauthority:/root/.Xauthority \
   -v $preprocessed_path:/tmp/preprocessed \
   koide3:jazzy \
-  ros2 run direct_visual_lidar_calibration calibrate --background /tmp/preprocessed 
+  ros2 run direct_visual_lidar_calibration calibrate --background /tmp/preprocessed
+
+# glfw error 65544: X11: Failed to open display :1
+  failed to initialize GLFW
+  [ros2run]: Segmentation faultxhost +local:root
+# Solved By: xhost +local:root
+
 

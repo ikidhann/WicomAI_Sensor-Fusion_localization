@@ -1,0 +1,25 @@
+cam_publisher_node:
+  ros__parameters:
+    cam_source: 0
+    camera_name: narrow_stereo
+    frame_width: 1920
+    frame_height: 1080
+    fps: 30.0
+    intrinsics_param:
+      distortion_model: plumb_bob
+      distortion_coeff:
+        [0.173031, -0.279889, 0.001481, -0.006528, 0.000000]
+      camera_matrix:
+        [1161.813779, 0.000000, 948.845954, 0.000000, 1157.559926, 531.339864, 0.000000, 0.000000, 1.000000]
+      rectification_matrix:
+        [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+      projection_matrix:
+        [1166.413940, 0.000000, 944.000708, 0.000000, 0.000000, 1192.627686, 532.082566, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
+static_tf_broadcaster:
+  ros__parameters:
+    T_lidar_camera: [
+      # Translation
+      1.832136985940397, -0.4483819978734169, -1.1060354201087983,
+      # Rotation (quaternion)
+      -0.24933043674867014, 0.23204798616055713, -0.15283054875223365, 0.9277019396323576
+    ]

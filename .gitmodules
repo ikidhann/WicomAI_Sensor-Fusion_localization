@@ -1,7 +1,7 @@
 [submodule "koide3/direct_visual_lidar_calibration"]
 	path = koide3/direct_visual_lidar_calibration
 	url = https://github.com/koide3/direct_visual_lidar_calibration.git
-[submodule "calib_ws/src/velodyne"]
-	path = calib_ws/src/velodyne
+[submodule "ros_ws/src/velodyne"]
+	path = ros_ws/src/velodyne
 	url = https://github.com/ros-drivers/velodyne.git
 	branch = jazzy-devel

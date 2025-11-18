@@ -10,7 +10,6 @@ def generate_launch_description():
     
     bringup_pkg = get_package_share_directory('sensors_bringup')
     driver_pkg = get_package_share_directory('sensors_driver')
-    processing_pkg = get_package_share_directory('sensors_processing')
     velodyne_pkg = get_package_share_directory('velodyne') 
 
     config_file = os.path.join(
@@ -38,16 +37,16 @@ def generate_launch_description():
         parameters=[config_file]
     )
 
-    lidar_cam_sync_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(processing_pkg, 'launch', 'lidar_cam_sync.launch.py')
-        )
+    lidar_cam_sync_node = Node(
+        package='sensors_processing',
+        executable='lidar_cam_sync_node',
+        name='lidar_cam_sync_node',
     )
 
-    lidar_cam_proj_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(processing_pkg, 'launch', 'lidar_cam_proj.launch.py')
-        )
+    drone_localization_node = Node(
+        package='sensors_processing',
+        executable='drone_localization_node',
+        name='drone_localization_node',
     )
 
     return LaunchDescription([
@@ -57,6 +56,6 @@ def generate_launch_description():
         LogInfo(msg="Starting static tf2..."),
         static_tf_node,
         LogInfo(msg="Starting sensor processing..."),
-        lidar_cam_sync_launch,
-        lidar_cam_proj_launch
+        lidar_cam_sync_node,
+        drone_localization_node
     ])

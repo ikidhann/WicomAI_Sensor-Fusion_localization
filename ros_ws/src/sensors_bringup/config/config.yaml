@@ -15,6 +15,11 @@ cam_publisher_node:
         [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
       projection_matrix:
         [1166.413940, 0.000000, 944.000708, 0.000000, 0.000000, 1192.627686, 532.082566, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
+instance_seg_node:
+  ros__parameters:
+    model_path: "model/yolov8n-seg.pt"
+    confidence_th: 0.5
+    target_class: 0
 static_tf_broadcaster:
   ros__parameters:
     T_lidar_camera: [

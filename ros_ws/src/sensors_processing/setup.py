@@ -12,8 +12,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
-        (os.path.join('share', package_name, 'launch'), glob('launch/*.py')),
+        (os.path.join('share', package_name, 'model'), glob('model/*.pt')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -30,6 +29,8 @@ setup(
         'console_scripts': [
             'lidar_cam_sync_node = sensors_processing.lidar_cam_sync:main',
             'lidar_cam_proj_node = sensors_processing.lidar_cam_proj:main',
+            'drone_localization_node = sensors_processing.drone_localization:main',
+            'instance_seg_node = sensors_processing.segmentation:main',
         ],
     },
 )

@@ -10,7 +10,6 @@ def generate_launch_description():
     
     bringup_pkg = get_package_share_directory('sensors_bringup')
     driver_pkg = get_package_share_directory('sensors_driver')
-    processing_pkg = get_package_share_directory('sensors_processing')
     velodyne_pkg = get_package_share_directory('velodyne') 
 
     config_file = os.path.join(
@@ -31,10 +30,10 @@ def generate_launch_description():
         launch_arguments=configs.items()
     )
     
-    processing_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(processing_pkg, 'launch', 'lidar_cam_sync.launch.py')
-        )
+    lidar_cam_sync_node = Node(
+        package='sensors_processing',
+        executable='lidar_cam_sync_node',
+        name='lidar_cam_sync_node',
     )
 
     return LaunchDescription([
@@ -43,5 +42,5 @@ def generate_launch_description():
         camera_launch,
         LogInfo(msg="Starting static tf2..."),
         LogInfo(msg="Starting sensor processing..."),
-        processing_launch
+        lidar_cam_sync_node
     ])

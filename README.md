@@ -42,10 +42,13 @@ docker images
 
 
 ## Data Collection & Visualization
+### Main working directory
+```bash
+cd ros2-drone-localization/
+```
 ### Collecting sensor data via ROS2
 ```bash
 # source local ros2 installation and launch
-cd ros_ws/
 source setup.sh
 ros_launch_sensors_sync
 
@@ -66,7 +69,6 @@ ros2 bag record -d 30 -o "$rosbag_record_path" \
 ### Find Lidar-Camera extrinsic calibration params
 ```bash
 # setup path variables
-cd ros2-drone-localization/
 bag_path="$(pwd)/bags/bag_2510291931"
 preprocessed_path="$(pwd)/bags_preprocessed"
 
@@ -104,7 +106,17 @@ Calibration param results [x, y, z, qw, qx, qy, qz] located at: **bags_preproces
 
 ```bash
 # source local ros2 installation and launch
-cd ros_ws/
+source setup.sh
+ros_launch_projection
+
+# open rviz add add image data from topic /lidar_cam_proj
+rviz2 -f velodyne
+```
+
+### Visualize Drone Localization 
+
+```bash
+# source local ros2 installation and launch
 source setup.sh
 ros_launch_localization
 

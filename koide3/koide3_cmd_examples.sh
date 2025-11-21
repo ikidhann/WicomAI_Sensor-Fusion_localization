@@ -1,7 +1,7 @@
-bag_path="$(pwd)/bags/bag_2511071534"
+bag_path="$(pwd)/bags/bag_2511151254"
 preprocessed_path="$(pwd)/bags_preprocessed"
 
-# Preprocessing
+# Step 1: Preprocessing
 docker run \
   --rm \
   --net host \
@@ -18,17 +18,21 @@ docker run \
     --camera_info_topic /sync/cam_info \
     /tmp/input_bags /tmp/preprocessed
 
-# Initial guess
-# docker run \
-#   --rm \
-#   --net host \
-#   --gpus all \
-#   -e DISPLAY=$DISPLAY \
-#   -v $HOME/.Xauthority:/root/.Xauthority \
-#   -v $preprocessed_path:/tmp/preprocessed \
-#   koide3:jazzy \
-#   ros2 run direct_visual_lidar_calibration initial_guess_manual /tmp/preprocessed
+# Step 2: Initial guess (choose Manual or Automatic)
+## Manual
+docker run \
+  --rm \
+  --net host \
+  --gpus all \
+  --device=/dev/dri \
+  -e DISPLAY=$DISPLAY \
+  -e __GLX_VENDOR_LIBRARY_NAME=nvidia \
+  -v $HOME/.Xauthority:/root/.Xauthority \
+  -v $preprocessed_path:/tmp/preprocessed \
+  koide3:jazzy \
+  ros2 run direct_visual_lidar_calibration initial_guess_manual /tmp/preprocessed
 
+## Automatic
 docker run \
   --rm \
   --net host \
@@ -49,7 +53,7 @@ docker run \
   koide3:jazzy \
   ros2 run direct_visual_lidar_calibration initial_guess_auto /tmp/preprocessed
 
-# Fine registration
+# Step 3: Fine registration
 docker run \
   --rm \
   --net host \
@@ -62,7 +66,7 @@ docker run \
   koide3:jazzy \
   ros2 run direct_visual_lidar_calibration calibrate --background /tmp/preprocessed
 
-# Result inspection
+# Optional: Result inspection
 docker run \
   --rm \
   --net host \

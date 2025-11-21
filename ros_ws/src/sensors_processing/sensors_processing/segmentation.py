@@ -42,7 +42,8 @@ class InstanceSegmentation(Node):
             cv_image, 
             classes=[self.target_class], 
             conf=self.conf, 
-            verbose=False
+            verbose=False,
+            device='cuda:0'
         )
 
         results = results[0].cpu()
@@ -62,31 +63,30 @@ class InstanceSegmentation(Node):
 
     def inference_callback(self, raw_image_msg):
         cv_image = self.cv_bridge_.imgmsg_to_cv2(raw_image_msg, 'bgr8')
-        # self.get_logger().info(f'Origin IMG Shape: {cv_image.shape}', throttle_duration_sec=2.0)
-        masked_img, masks = self._yolo_inference(cv_image)
-        # self.get_logger().info(f'Masked IMG Shape: {masked_img.shape}', throttle_duration_sec=2.0)
-        # self.get_logger().info(f'Detected MASKS Shape: {masks.shape}', throttle_duration_sec=2.0)
 
+        try:
+            masked_img, masks = self._yolo_inference(cv_image)
+        except Exception as e:
+            self.get_logger().error(f'Inference error in InstanceSegmentation node: {e}')
+            return
+        
         masked_img_msg = self.cv_bridge_.cv2_to_imgmsg(masked_img, 'bgr8')
         masked_img_msg.header = raw_image_msg.header
         seg_masks_msg = self._nparray_to_msg(masks)
         seg_masks_msg.header = raw_image_msg.header
         
-        self.masks_pub_.publish(seg_masks_msg)
-        self.masked_image_pub_.publish(masked_img_msg)
-
+        try:
+            self.masks_pub_.publish(seg_masks_msg)
+            self.masked_image_pub_.publish(masked_img_msg)
+        except Exception as e:
+            self.get_logger().error(f'Publishing error in InstanceSegmentation node: {e}')
 
 def main(args=None):
-    try:
-        rclpy.init(args=args)
-        node = InstanceSegmentation()
-        rclpy.spin(node)
-    except Exception as e:
-        print(f'Exception in InstanceSegmentation node: {e}')
-        raise(e)
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.init(args=args)
+    node = InstanceSegmentation()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == '__main__':  

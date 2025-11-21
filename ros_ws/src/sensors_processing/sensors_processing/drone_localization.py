@@ -27,7 +27,7 @@ class DroneLocalization(Node):
 
         self.ts_ = message_filters.ApproximateTimeSynchronizer(
             [self.sync_pcd_sub_, self.sync_image_sub_, self.sync_cam_info_sub_, self.sync_mask_sub_],
-            queue_size=10,
+            queue_size=5,
             slop=0.05 # seconds
         )
         self.ts_.registerCallback(self.localization_callback)
@@ -139,15 +139,11 @@ class DroneLocalization(Node):
 
 
 def main(args=None):
-    try:
-        rclpy.init(args=args)
-        node = DroneLocalization()
-        rclpy.spin(node)
-    except Exception as e:
-        print(f'Exception in DroneLocalization node: {e}')
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.init(args=args)
+    node = DroneLocalization()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == '__main__':  

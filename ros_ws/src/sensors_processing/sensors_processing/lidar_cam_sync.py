@@ -18,7 +18,7 @@ class LidarCameraSync(Node):
 
         self.ts_ = message_filters.ApproximateTimeSynchronizer(
             [self.pcd_sub_, self.raw_img_sub_, self.cam_info_sub_],
-            queue_size=10,
+            queue_size=5,
             slop=0.05, # seconds
             allow_headerless=False
         )
@@ -52,15 +52,11 @@ class LidarCameraSync(Node):
 
 
 def main(args=None):
-    try:
-        rclpy.init(args=args)
-        node = LidarCameraSync()
-        rclpy.spin(node)
-    except Exception as e:
-        print(f'Exception in LidarCameraSync node: {e}')
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.init(args=args)
+    node = LidarCameraSync()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

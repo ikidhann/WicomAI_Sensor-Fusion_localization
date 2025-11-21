@@ -88,15 +88,11 @@ class CameraPublisher(Node):
 
 
 def main(args=None):
-    try:
-        rclpy.init(args=args)
-        node = CameraPublisher()
-        rclpy.spin(node)
-    except Exception as e:
-        print(f'Exception in CameraPublisher node: {e}')
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    rclpy.init(args=args)
+    node = CameraPublisher()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
     main()

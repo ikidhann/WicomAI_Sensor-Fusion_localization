@@ -8,4 +8,5 @@ alias ros_launch_velodyne='ros2 launch velodyne velodyne-all-nodes-VLP32C-launch
 alias ros_launch_sensors_sync='ros2 launch sensors_bringup sensors_sync_bringup.launch.py'
 alias ros_launch_projection='ros2 launch sensors_bringup projection_bringup.launch.py'
 alias ros_launch_localization='ros2 launch sensors_bringup localization_bringup.launch.py'
+alias ros_launch_localization_rosbag='ros2 launch sensors_bringup localization_rosbag_bringup.launch.py'
 

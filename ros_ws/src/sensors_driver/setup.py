@@ -29,6 +29,7 @@ setup(
     entry_points={
         'console_scripts': [
             'cam_publisher_node = sensors_driver.cam_publisher:main',
+            'ids_cam_publisher_node = sensors_driver.ids_cam_pub:main',
         ],
     },
 )

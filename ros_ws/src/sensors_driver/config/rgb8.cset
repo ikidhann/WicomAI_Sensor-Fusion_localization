@@ -1,0 +1,368 @@
+# {05D8C294-F295-4dfb-9D01-096BD04049F4}
+# GenApi persistence file (version 3.4.1)
+# Device = IDS_Imaging_Development_Systems_GmbH::U3_304x_C --  -- Device version = 3.36.0 -- Product GUID = 79de3658-7d76-a7ce-899a-0ac55e20d107 -- Product version GUID = c56db963-df71-279e-0ad2-424a7a4dcc3b
+TriggerMode	{TriggerSelector=AcquisitionStart}	Off
+TriggerMode	{TriggerSelector=AcquisitionEnd}	Off
+TriggerMode	{TriggerSelector=FrameStart}	Off
+TriggerMode	{TriggerSelector=ExposureStart}	Off
+TriggerMode	{TriggerSelector=ExposureEnd}	Off
+TriggerSelector	ExposureStart
+TriggerSource	{TriggerSelector=AcquisitionStart}	Software
+TriggerSource	{TriggerSelector=AcquisitionEnd}	Software
+TriggerSource	{TriggerSelector=FrameStart}	Software
+TriggerSource	{TriggerSelector=ExposureStart}	Software
+TriggerSource	{TriggerSelector=ExposureEnd}	Software
+TriggerSelector	ExposureStart
+TriggerActivation	{TriggerSelector=AcquisitionStart}	RisingEdge
+TriggerActivation	{TriggerSelector=AcquisitionEnd}	RisingEdge
+TriggerActivation	{TriggerSelector=FrameStart}	RisingEdge
+TriggerActivation	{TriggerSelector=ExposureStart}	RisingEdge
+TriggerActivation	{TriggerSelector=ExposureEnd}	RisingEdge
+TriggerSelector	ExposureStart
+TriggerDelay	{TriggerSelector=AcquisitionStart}	0
+TriggerDelay	{TriggerSelector=AcquisitionEnd}	0
+TriggerDelay	{TriggerSelector=FrameStart}	0
+TriggerDelay	{TriggerSelector=ExposureStart}	0
+TriggerDelay	{TriggerSelector=ExposureEnd}	0
+TriggerSelector	ExposureStart
+TriggerDivider	{TriggerSelector=AcquisitionStart}	1
+TriggerDivider	{TriggerSelector=AcquisitionEnd}	1
+TriggerDivider	{TriggerSelector=FrameStart}	1
+TriggerDivider	{TriggerSelector=ExposureStart}	1
+TriggerDivider	{TriggerSelector=ExposureEnd}	1
+TriggerSelector	ExposureStart
+AcquisitionMode	Continuous
+AcquisitionFrameCount	1
+SensorFrameTimeClocksTarget	3700000
+AcquisitionFrameRateTargetEnable	0
+ExposureAuto	Off
+SensorExposureTimeClocks	2343305
+SensorFrameTimeClocks	2466750
+TriggerControlledExposureTimeClocksMin	500
+TriggerControlledExposureTimeClocksMax	147999000
+SensorOperationModeRaw	Default
+DeviceLinkThroughputLimit	400000000
+LineMode	{LineSelector=Line2}	Input
+LineMode	{LineSelector=Line3}	Input
+LineSelector	Line0
+LineInverter	{LineSelector=Line0}	0
+LineInverter	{LineSelector=Line1}	0
+LineInverter	{LineSelector=Line2}	0
+LineInverter	{LineSelector=Line3}	0
+LineSelector	Line0
+LineNoiseFilterEnable	{LineSelector=Line0}	0
+LineNoiseFilterEnable	{LineSelector=Line2}	0
+LineNoiseFilterEnable	{LineSelector=Line3}	0
+LineSelector	Line0
+LineNoiseFilterDurationClocks	{LineSelector=Line0}	1
+LineNoiseFilterDurationClocks	{LineSelector=Line2}	1
+LineNoiseFilterDurationClocks	{LineSelector=Line3}	1
+LineSelector	Line0
+UserOutputValue	{UserOutputSelector=UserOutput0}	0
+UserOutputValue	{UserOutputSelector=UserOutput1}	0
+UserOutputValue	{UserOutputSelector=UserOutput2}	0
+UserOutputValue	{UserOutputSelector=UserOutput3}	0
+UserOutputSelector	UserOutput0
+LineSource	{LineSelector=Line1}	Off
+LineSource	{LineSelector=Line2}	Off
+LineSource	{LineSelector=Line3}	Off
+LineSelector	Line0
+CounterEventSource	{CounterSelector=Counter0}	Off
+CounterEventSource	{CounterSelector=Counter1}	Off
+CounterSelector	Counter0
+CounterSelector	Counter0
+CounterResetSource	{CounterSelector=Counter0}	Off
+CounterResetSource	{CounterSelector=Counter1}	Off
+CounterSelector	Counter0
+CounterSelector	Counter0
+CounterTriggerSource	{CounterSelector=Counter0}	Off
+CounterTriggerSource	{CounterSelector=Counter1}	Off
+CounterSelector	Counter0
+CounterSelector	Counter0
+CounterDuration	{CounterSelector=Counter0}	0
+CounterDuration	{CounterSelector=Counter1}	0
+CounterSelector	Counter0
+TimerDuration	{TimerSelector=Timer0}	0
+TimerDuration	{TimerSelector=Timer1}	0
+TimerSelector	Timer0
+TimerDelay	{TimerSelector=Timer0}	0
+TimerDelay	{TimerSelector=Timer1}	0
+TimerSelector	Timer0
+TimerTriggerSource	{TimerSelector=Timer0}	Off
+TimerTriggerSource	{TimerSelector=Timer1}	Off
+TimerSelector	Timer0
+TimerSelector	Timer0
+PWMTriggerSource	{PWMSelector=PWM0}	Off
+PWMSelector	PWM0
+PWMSelector	PWM0
+PWMFrequency	{PWMSelector=PWM0}	100
+PWMSelector	PWM0
+PWMDutyCycle	{PWMSelector=PWM0}	50
+PWMSelector	PWM0
+FlashStartDelayClocks	0
+FlashEndDelayClocks	0
+FlashReference	ExposureActive
+EventNotification	{EventSelector=ExposureStart}	Off
+EventNotification	{EventSelector=ExposureEnd}	Off
+EventNotification	{EventSelector=Line0RisingEdge}	Off
+EventNotification	{EventSelector=Line1RisingEdge}	Off
+EventNotification	{EventSelector=Line0FallingEdge}	Off
+EventNotification	{EventSelector=Line1FallingEdge}	Off
+EventNotification	{EventSelector=Error}	Off
+EventNotification	{EventSelector=Line2RisingEdge}	Off
+EventNotification	{EventSelector=Line3RisingEdge}	Off
+EventNotification	{EventSelector=Line2FallingEdge}	Off
+EventNotification	{EventSelector=Line3FallingEdge}	Off
+EventNotification	{EventSelector=FrameDropped}	Off
+EventNotification	{EventSelector=ExposureTriggerMissed}	Off
+EventNotification	{EventSelector=Temperature}	Off
+EventNotification	{EventSelector=CriticalError}	On
+EventNotification	{EventSelector=EventDropped}	On
+EventSelector	EventDropped
+LEDTriggerSource	{LEDSelector=LEDStatus}	CameraStatus
+LEDSelector	LEDStatus
+BrightnessAutoFramerateLimitMode	Fixed
+BrightnessAutoExposureTimeMinClocks	{BrightnessAutoExposureTimeLimitMode=Off}	1555
+BrightnessAutoExposureTimeMinClocks	{BrightnessAutoExposureTimeLimitMode=On}	1555
+BrightnessAutoExposureTimeLimitMode	Off
+BrightnessAutoExposureTimeMaxClocks	{BrightnessAutoExposureTimeLimitMode=Off}	148000055
+BrightnessAutoExposureTimeMaxClocks	{BrightnessAutoExposureTimeLimitMode=On}	148000055
+BrightnessAutoExposureTimeLimitMode	Off
+BrightnessAutoGainMin	{BrightnessAutoGainLimitMode=Off}	1
+BrightnessAutoGainMin	{BrightnessAutoGainLimitMode=On}	1
+BrightnessAutoGainLimitMode	Off
+BrightnessAutoGainMax	{BrightnessAutoGainLimitMode=Off}	25.4097
+BrightnessAutoGainMax	{BrightnessAutoGainLimitMode=On}	25.4097
+BrightnessAutoGainLimitMode	Off
+BrightnessAutoPercentile	13
+BrightnessAutoTarget	150
+BrightnessAutoTargetTolerance	3
+GainAuto	Continuous
+BalanceWhiteAuto	Continuous
+Gamma	1
+ADCGainCorrection	{GainSelector=AnalogAll}	1
+GainSelector	AnalogAll
+Gain	{GainSelector=DigitalAll}	1
+GainSelector	AnalogAll
+BlackLevelInt	0
+BlackLevelAuto	Off
+SequencerFeatureSelector	ExposureTime
+SequencerSetSelector	0
+SequencerPathSelector	0
+SequencerSetSelector	0
+SequencerPathSelector	0
+SequencerSetSelector	0
+SequencerPathSelector	0
+SequencerExposureTimeShadow	{SequencerSetSelector=0}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=1}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=2}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=3}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=4}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=5}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=6}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=7}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=8}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=9}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=10}	1110055
+SequencerExposureTimeShadow	{SequencerSetSelector=11}	1110055
+SequencerSetSelector	0
+SequencerGainShadow	{SequencerSetSelector=0	SequencerGainSelectorShadow=AnalogAll}	1
+SequencerGainShadow	{SequencerSetSelector=0	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=0	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=0	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=0	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=1	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=1	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=1	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=1	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=1	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=2	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=2	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=2	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=2	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=2	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=3	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=3	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=3	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=3	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=3	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=4	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=4	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=4	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=4	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=4	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=5	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=5	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=5	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=5	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=5	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=6	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=6	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=6	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=6	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=6	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=7	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=7	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=7	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=7	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=7	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=8	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=8	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=8	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=8	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=8	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=9	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=9	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=9	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=9	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=9	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=10	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=10	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=10	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=10	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=10	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=11	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerGainShadow	{SequencerSetSelector=11	SequencerGainSelectorShadow=DigitalAll}	1
+SequencerGainShadow	{SequencerSetSelector=11	SequencerGainSelectorShadow=DigitalRed}	1.48047
+SequencerGainShadow	{SequencerSetSelector=11	SequencerGainSelectorShadow=DigitalGreen}	1
+SequencerGainShadow	{SequencerSetSelector=11	SequencerGainSelectorShadow=DigitalBlue}	2.35938
+SequencerSetSelector	0
+SequencerGainSelectorShadow	AnalogAll
+SequencerOffsetXShadow	{SequencerSetSelector=0}	8
+SequencerOffsetXShadow	{SequencerSetSelector=1}	8
+SequencerOffsetXShadow	{SequencerSetSelector=2}	8
+SequencerOffsetXShadow	{SequencerSetSelector=3}	8
+SequencerOffsetXShadow	{SequencerSetSelector=4}	8
+SequencerOffsetXShadow	{SequencerSetSelector=5}	8
+SequencerOffsetXShadow	{SequencerSetSelector=6}	8
+SequencerOffsetXShadow	{SequencerSetSelector=7}	8
+SequencerOffsetXShadow	{SequencerSetSelector=8}	8
+SequencerOffsetXShadow	{SequencerSetSelector=9}	8
+SequencerOffsetXShadow	{SequencerSetSelector=10}	8
+SequencerOffsetXShadow	{SequencerSetSelector=11}	8
+SequencerSetSelector	0
+SequencerOffsetYShadow	{SequencerSetSelector=0}	4
+SequencerOffsetYShadow	{SequencerSetSelector=1}	4
+SequencerOffsetYShadow	{SequencerSetSelector=2}	4
+SequencerOffsetYShadow	{SequencerSetSelector=3}	4
+SequencerOffsetYShadow	{SequencerSetSelector=4}	4
+SequencerOffsetYShadow	{SequencerSetSelector=5}	4
+SequencerOffsetYShadow	{SequencerSetSelector=6}	4
+SequencerOffsetYShadow	{SequencerSetSelector=7}	4
+SequencerOffsetYShadow	{SequencerSetSelector=8}	4
+SequencerOffsetYShadow	{SequencerSetSelector=9}	4
+SequencerOffsetYShadow	{SequencerSetSelector=10}	4
+SequencerOffsetYShadow	{SequencerSetSelector=11}	4
+SequencerSetSelector	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=0}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=1}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=2}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=3}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=4}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=5}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=6}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=7}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=8}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=9}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=10}	0
+SequencerFlashStartDelayShadow	{SequencerSetSelector=11}	0
+SequencerSetSelector	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=0}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=1}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=2}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=3}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=4}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=5}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=6}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=7}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=8}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=9}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=10}	0
+SequencerFlashEndDelayShadow	{SequencerSetSelector=11}	0
+SequencerSetSelector	0
+SequencerFlashReferenceShadow	{SequencerSetSelector=0}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=1}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=2}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=3}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=4}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=5}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=6}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=7}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=8}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=9}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=10}	ExposureActive
+SequencerFlashReferenceShadow	{SequencerSetSelector=11}	ExposureActive
+SequencerSetSelector	0
+SensorPixelSize	Bpp10
+Width	1440
+Height	1080
+OffsetX	8
+OffsetY	4
+BinningHorizontal	{BinningSelector=Region0}	1
+BinningSelector	Region0
+BinningVertical	{BinningSelector=Region0}	1
+BinningSelector	Region0
+DecimationHorizontal	{DecimationSelector=Sensor}	1
+DecimationHorizontal	{DecimationSelector=Region0}	1
+DecimationSelector	Sensor
+DecimationVertical	{DecimationSelector=Sensor}	1
+DecimationVertical	{DecimationSelector=Region0}	1
+DecimationSelector	Sensor
+TestPattern	Off
+ReverseX	0
+ReverseY	0
+PixelFormat	{ComponentSelector=Intensity}	RGB8
+ComponentSelector	Intensity
+SubRegionSourceSelector	{SubRegionSelector=AutoFeatureBrightnessAuto}	Region0
+SubRegionSourceSelector	{SubRegionSelector=AutoFeatureBalanceWhiteAuto}	Region0
+SubRegionSelector	AutoFeatureBrightnessAuto
+SubRegionFollowSource	{SubRegionSelector=AutoFeatureBrightnessAuto}	1
+SubRegionFollowSource	{SubRegionSelector=AutoFeatureBalanceWhiteAuto}	1
+SubRegionSelector	AutoFeatureBrightnessAuto
+SubRegionSelector	AutoFeatureBrightnessAuto
+SubRegionSelector	AutoFeatureBrightnessAuto
+SubRegionSelector	AutoFeatureBrightnessAuto
+SubRegionSelector	AutoFeatureBrightnessAuto
+ChunkModeActive	0
+ChunkEnable	{ChunkSelector=OffsetX}	0
+ChunkEnable	{ChunkSelector=OffsetY}	0
+ChunkEnable	{ChunkSelector=Width}	0
+ChunkEnable	{ChunkSelector=Height}	0
+ChunkEnable	{ChunkSelector=PixelFormat}	0
+ChunkEnable	{ChunkSelector=Timestamp}	0
+ChunkEnable	{ChunkSelector=LineStatusAll}	0
+ChunkEnable	{ChunkSelector=CounterValue}	0
+ChunkEnable	{ChunkSelector=ExposureTime}	0
+ChunkEnable	{ChunkSelector=Gain}	0
+ChunkEnable	{ChunkSelector=SequencerSetActive}	0
+ChunkEnable	{ChunkSelector=ExposureTriggerTimestamp}	0
+ChunkEnable	{ChunkSelector=BrightnessAutoStatus}	0
+ChunkEnable	{ChunkSelector=BalanceWhiteAutoStatus}	0
+ChunkSelector	ExposureTime
+ChunkLatchTriggerSource	{ChunkSelector=OffsetX}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=OffsetY}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=Width}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=Height}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=PixelFormat}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=Timestamp}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=LineStatusAll}	ReadOutStart
+ChunkLatchTriggerSource	{ChunkSelector=CounterValue}	ReadOutStart
+ChunkLatchTriggerSource	{ChunkSelector=ExposureTime}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=Gain}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=SequencerSetActive}	ExposureStart
+ChunkLatchTriggerSource	{ChunkSelector=ExposureTriggerTimestamp}	ExposureTrigger
+ChunkLatchTriggerSource	{ChunkSelector=BrightnessAutoStatus}	ReadOutStart
+ChunkLatchTriggerSource	{ChunkSelector=BalanceWhiteAutoStatus}	ReadOutStart
+ChunkSelector	ExposureTime
+ColorCorrectionMode	Auto
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain00}	256
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain01}	0
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain02}	0
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain10}	0
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain11}	256
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain12}	0
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain20}	0
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain21}	0
+ColorCorrectionMatrixIntValue	{ColorCorrectionMatrix=Custom0	ColorCorrectionMatrixValueSelector=Gain22}	256
+ColorCorrectionMatrix	HQ
+ColorCorrectionMatrixValueSelector	Gain00

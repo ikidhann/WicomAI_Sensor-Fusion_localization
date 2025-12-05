@@ -4,7 +4,6 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, LogInfo
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node 
-import os
 
 def generate_launch_description():
     

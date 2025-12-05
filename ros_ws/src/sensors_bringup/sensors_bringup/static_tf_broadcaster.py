@@ -34,10 +34,18 @@ class StaticTfBroadcaster(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = StaticTfBroadcaster()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+    
+    try:
+        node = StaticTfBroadcaster()
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        
+        if rclpy.ok():
+            rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()

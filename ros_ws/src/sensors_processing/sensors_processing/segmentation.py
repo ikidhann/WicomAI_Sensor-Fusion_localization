@@ -67,7 +67,7 @@ class InstanceSegmentation(Node):
         try:
             masked_img, masks = self._yolo_inference(cv_image)
         except Exception as e:
-            self.get_logger().error(f'Inference error in InstanceSegmentation node: {e}')
+            self.get_logger().warn(f'Inference error in InstanceSegmentation node: {e}')
             return
         
         masked_img_msg = self.cv_bridge_.cv2_to_imgmsg(masked_img, 'bgr8')
@@ -83,10 +83,18 @@ class InstanceSegmentation(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = InstanceSegmentation()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+
+    try:
+        node = InstanceSegmentation()
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        
+        if rclpy.ok():
+            rclpy.shutdown()
+
 
 
 if __name__ == '__main__':  

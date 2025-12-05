@@ -52,7 +52,7 @@ def extract_images_from_bag(bag_path, output_dir, topic="/ids/image"):
 
 if __name__ == "__main__":
     # Path must be the BAG FOLDER, NOT the .mcap file
-    bag_path = "/home/wicomai-cv/Documents/sensor_fusion/ros2-drone-localization/ros_ws/ros_record5"     # <-- FIX THIS
-    output_dir = "/home/wicomai-cv/Documents/sensor_fusion/ros2-drone-localization/ros_ws/src/sensors_driver/sensors_driver/extract_img"
+    bag_path =''
+    output_dir = ''
 
     extract_images_from_bag(bag_path, output_dir)

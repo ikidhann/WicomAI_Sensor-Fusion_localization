@@ -5,7 +5,6 @@ from cv_bridge import CvBridge
 import cv2
 import os
 
-import numpy as np
 from ids_peak import ids_peak
 from ids_peak import ids_peak_ipl_extension
 
@@ -19,7 +18,7 @@ class CameraPublisher(Node):
         # ------------------------- PARAMETERS -------------------------
         self.declare_parameter('camera_name', 'opencv')
         self.declare_parameter('cam_source', 0)
-        self.declare_parameter('frame_width', 1440)
+        self.declare_parameter('frame_width', 1920)
         self.declare_parameter('frame_height', 1080)
         self.declare_parameter('fps', 30.0)
 
@@ -38,12 +37,13 @@ class CameraPublisher(Node):
         self.frame_width_ = self.get_parameter('frame_width').value
         self.frame_height_ = self.get_parameter('frame_height').value
 
-        # Build full path to .cset file (NEW)
-        self.cset_full_path = os.path.join(
+        # Build full path to .cset file 
+        default_cset_path = 'config/rgb8.cset'
+        self.ids_config = os.path.join(
             get_package_share_directory('sensors_driver'),
-            self.get_parameter('cset_path').value
+            default_cset_path
         )
-        self.get_logger().info(f"Using IDS CSET file: {self.cset_full_path}")
+        self.get_logger().info(f"Using IDS CSET file: {self.ids_config}")
 
         # Intrinsics dict
         self.intrinsics_param_ = {}
@@ -71,12 +71,8 @@ class CameraPublisher(Node):
         self.bridge = CvBridge()
 
 
-    # =====================================================================
-    #     INITIALIZE IDS CAMERA
-    # =====================================================================
     def _init_ids_camera(self):
         self.get_logger().info("Initializing IDS camera...")
-        CAM_INDEX = 0
 
         ids_peak.Library.Initialize()
         device_manager = ids_peak.DeviceManager.Instance()
@@ -86,12 +82,12 @@ class CameraPublisher(Node):
             self.get_logger().error("No IDS camera detected!")
             return
 
-        self.device = device_manager.Devices()[CAM_INDEX].OpenDevice(ids_peak.DeviceAccessType_Control)
+        self.device = device_manager.Devices()[self.cam_source_].OpenDevice(ids_peak.DeviceAccessType_Control)
         self.remote = self.device.RemoteDevice().NodeMaps()[0]
 
         try:
-            self.remote.LoadFromFile(self.cset_full_path)
-            self.get_logger().info(f"Loaded IDS CSET: {self.cset_full_path}")
+            self.remote.LoadFromFile(self.ids_config)
+            self.get_logger().info(f"Loaded IDS CSET: {self.ids_config}")
         except Exception as e:
             self.get_logger().error(f"Failed to load CSET file: {e}")
 
@@ -116,9 +112,6 @@ class CameraPublisher(Node):
         self.get_logger().info("IDS camera initialized successfully.")
 
 
-    # =====================================================================
-    #     INITIALIZE OPENCV CAMERA
-    # =====================================================================
     def _init_opencv_camera(self):
         self.get_logger().info("Initializing OpenCV camera...")
 
@@ -130,9 +123,6 @@ class CameraPublisher(Node):
         self.get_logger().info("OpenCV camera initialized.")
 
 
-    # =====================================================================
-    #     LOAD CAMERA INFO
-    # =====================================================================
     def _load_camera_info(self):
         cam_info = CameraInfo()
         cam_info.width = self.frame_width_
@@ -145,32 +135,28 @@ class CameraPublisher(Node):
         return cam_info
 
 
-    # =====================================================================
-    #     TIMER CALLBACK
-    # =====================================================================
     def timer_callback(self):
 
-        # ============ IDS CAMERA FETCHING ============
         if self.camera_name == "ids":
             try:
                 buffer = self.data_stream.WaitForFinishedBuffer(50)
                 img = ids_peak_ipl_extension.BufferToImage(buffer)
                 frame = img.get_numpy_3D()
+                frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
                 self.data_stream.QueueBuffer(buffer)
 
             except Exception as e:
-                self.get_logger().warn(f"IDS Frame error: {e}")
+                self.get_logger().warn(f"IDS Frame error: {e}", throttle_duration_sec=5.0)
                 return
 
-        # ============ OPENCV CAMERA FETCHING ============
         else:
             ret, frame = self.cap.read()
             if not ret:
-                self.get_logger().warn("No frame from OpenCV camera.")
+                self.get_logger().warn("No frame from OpenCV camera.", throttle_duration_sec=5.0)
                 return
-            frame = cv2.resize(frame, (self.frame_width_, self.frame_height_))
 
         # ----------------- Publish Image -----------------
+        frame = cv2.resize(frame, (self.frame_width_, self.frame_height_))
         time_now = self.get_clock().now().to_msg()
         frame_id = "camera_optical_frame"
 
@@ -188,10 +174,17 @@ class CameraPublisher(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = CameraPublisher()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+
+    try:
+        node = CameraPublisher()
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':

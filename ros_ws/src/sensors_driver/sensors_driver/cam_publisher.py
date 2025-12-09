@@ -142,6 +142,7 @@ class CameraPublisher(Node):
                 buffer = self.data_stream.WaitForFinishedBuffer(50)
                 img = ids_peak_ipl_extension.BufferToImage(buffer)
                 frame = img.get_numpy_3D()
+                # self.get_logger().info(f"IMAGE SHAPE: {frame.shape}")
                 frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
                 self.data_stream.QueueBuffer(buffer)
 

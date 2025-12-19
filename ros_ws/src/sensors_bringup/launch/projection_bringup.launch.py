@@ -52,6 +52,7 @@ def generate_launch_description():
         package='sensors_processing',
         executable='instance_seg_node',
         name='instance_seg_node',
+        parameters=[config_file]
     )
     
     return LaunchDescription([

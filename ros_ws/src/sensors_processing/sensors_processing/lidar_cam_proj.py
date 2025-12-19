@@ -34,40 +34,40 @@ class LidarCameraProjection(Node):
         self.get_logger().info("Lidar to Camera Projection Node started!")
         
 
-    def _lidar_projection(self, transformed_pcd, cv_image, P, img_h, img_w):
-        point_count = 0
-        points_in_front = 0
-        points_in_frame = 0
+    def _lidar_projection(self, transformed_pcd, P, img_h, img_w):
 
-        for point in pc2.read_points(transformed_pcd, field_names=("x", "y", "z"), skip_nans=True):
-            point_count += 1
-            x_cam, y_cam, z_cam = point
-            
-            # Filter out points behind the camera
-            if z_cam <= 0.1: # meter
-                continue
-            points_in_front += 1
-            
-            # Project 3D point (x_cam, y_cam, z_cam) to 2D pixel (u, v)
-            # Create a 4x1 homogeneous point
-            point_3d_hom = np.array([x_cam, y_cam, z_cam, 1.0])
-            point_2d_hom = P @ point_3d_hom
-            
-            # Normalize to get pixel coordinates
-            u = int(point_2d_hom[0] / point_2d_hom[2])
-            v = int(point_2d_hom[1] / point_2d_hom[2])
+        pc_3d = pc2.read_points_numpy(transformed_pcd, field_names=("x", "y", "z"), skip_nans=True).T
+        N_points = pc_3d.shape[1]
 
-            # Visualize the point on the image
-            if 0 <= u < img_w and 0 <= v < img_h:
-                points_in_frame += 1
-                # Color based on depth (z_cam)
-                depth_color = min(255, int(z_cam * 20)) 
-                cv2.circle(cv_image, (u, v), radius=2, color=(0, 255-depth_color, depth_color), thickness=-1)
-            
+        pc_3d_hom = np.vstack((pc_3d, np.ones((1, N_points))))
+        pc_2d_hom = P @ pc_3d_hom
+
+        # Filter points in front of cam
+        z_cam = pc_2d_hom[2, :]
+        filter = z_cam > 0.1
+
+        pc_2d_hom = pc_2d_hom[:, filter]
+        z_cam = z_cam[filter]
+        N_in_front = pc_2d_hom.shape[1]
+
+        # Extract pixel coordinates
+        u = (pc_2d_hom[0, :] / z_cam).astype(np.int32)
+        v = (pc_2d_hom[1, :] / z_cam).astype(np.int32)
+
+        # Filter points within frame
+        filter = (u >= 0) & (u < img_w) & (v >= 0) & (v < img_h)
+        projected_pcd = np.vstack([u, v, z_cam]).T
+        projected_pcd = projected_pcd[filter, :]
+        N_in_frame = projected_pcd.shape[0]
+
+        log_msg = f'Points: Total={N_points} | InFront={N_in_front} | InFrame={N_in_frame}'
+
         self.get_logger().info(
-            f'Points: Total={point_count} | InFront={points_in_front} | InFrame={points_in_frame}',
+            log_msg,
             throttle_duration_sec=1.0
         )
+
+        return projected_pcd
 
     def projection_callback(self, pcd_msg, raw_image_msg, cam_info_msg):
         try:
@@ -90,7 +90,14 @@ class LidarCameraProjection(Node):
         # get camera projection matrix (P) from CameraInfo
         P = np.array(cam_info_msg.p).reshape(3, 4)
 
-        self._lidar_projection(transformed_pcd, cv_image, P, IMG_H, IMG_W)
+        projected_pcd = self._lidar_projection(transformed_pcd, P, IMG_H, IMG_W)
+
+        for point in projected_pcd:
+            u, v, z_cam = point
+            u, v = int(u), int(v)
+            
+            depth_color = min(255, int(z_cam * 20)) 
+            cv2.circle(cv_image, (u, v), radius=2, color=(0, 255-depth_color, depth_color), thickness=-1)
 
         # publish the projected image
         try:

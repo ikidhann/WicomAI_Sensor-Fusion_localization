@@ -10,13 +10,11 @@ import numpy as np
 import os
 import cv2
 
-
 class InstanceSegmentation(Node):
     def __init__(self):
         super().__init__('instance_seg_node')
         
-        default_model_path = 'model/yolov8n-seg.pt'
-        self.declare_parameter('model_path', default_model_path)
+        self.declare_parameter('model_path', 'model/yolov8n-seg.pt')
         self.declare_parameter('confidence_th', 0.6)
         self.declare_parameter('target_class', 0)  # Default 0: person / drone
 
@@ -24,6 +22,8 @@ class InstanceSegmentation(Node):
             get_package_share_directory('sensors_processing'),
             self.get_parameter('model_path').value
         )
+ 
+        self.get_logger().info(f"Segmentation Model: {model_path}")
 
         self.conf = self.get_parameter('confidence_th').value
         self.target_class = self.get_parameter('target_class').value
@@ -45,13 +45,15 @@ class InstanceSegmentation(Node):
             verbose=False,
             device='cuda:0'
         )
-
         results = results[0].cpu()
-        masks = results.masks.data.numpy()
-        img_h, img_w = cv_image.shape[0], cv_image.shape[1]
-        masks = np.array([cv2.resize(mask, (img_w, img_h), interpolation=cv2.INTER_NEAREST) for mask in masks])
-        masked_img = results.plot(boxes=False, color_mode='instance')
+        masked_img, masks = None, None
 
+        if len(results.boxes.cls) > 0:
+            masks = results.masks.data.numpy()
+            img_h, img_w = cv_image.shape[0], cv_image.shape[1]
+            masks = np.array([cv2.resize(mask, (img_w, img_h), interpolation=cv2.INTER_NEAREST) for mask in masks])
+            masked_img = results.plot(boxes=False, color_mode='instance')
+            
         return masked_img, masks
     
     def _nparray_to_msg(self, arr):
@@ -66,6 +68,11 @@ class InstanceSegmentation(Node):
 
         try:
             masked_img, masks = self._yolo_inference(cv_image)
+
+            if masks is None:
+                self.get_logger().info('No Drone Instances Detected!')
+                return
+
         except Exception as e:
             self.get_logger().warn(f'Inference error in InstanceSegmentation node: {e}')
             return
@@ -94,7 +101,6 @@ def main(args=None):
         
         if rclpy.ok():
             rclpy.shutdown()
-
 
 
 if __name__ == '__main__':  

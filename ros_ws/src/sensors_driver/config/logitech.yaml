@@ -1,7 +1,7 @@
 cam_publisher_node:
   ros__parameters:
     cam_source: 0
-    camera_name: narrow_stereo
+    camera_name: logitech
     frame_width: 1920
     frame_height: 1080
     fps: 30.0

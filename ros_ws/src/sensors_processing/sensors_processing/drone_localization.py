@@ -69,7 +69,6 @@ class DroneLocalization(Node):
         return projected_pcd, log_msg
 
     
-    # TODO: handle multiple instances in mask
     def _pc_localization(self, projected_pcd, cv_image, masks, threshold=0.1):
         try:
             masks = masks[0]
@@ -85,8 +84,15 @@ class DroneLocalization(Node):
                     cv2.circle(cv_image, (u, v), radius=2, color=(0, 255-depth_color, depth_color), thickness=-1)
 
             if len(distances) != 0:
-                distances = np.array(distances).min()
-                log_msg = f'Localized Drone Distance: {distances:.2f} meters'
+                # relative_distance = np.array(distances).min()
+                relative_distance = np.quantile(np.array(distances), 0.05)
+             
+                # upper_bound = int(len(distances) * 0.05)
+                # distances = np.array(sorted(distances))
+                # relative_distance = np.mean(distances[:upper_bound])
+
+                log_msg = f'Localized Drone Distance: {relative_distance:.2f} meters'
+                # self.get_logger().info(f'Drone Distances: {len(distances)}', throttle_duration_sec=1.0)
             else:
                 log_msg = 'Localized Drone Distance: None'
 

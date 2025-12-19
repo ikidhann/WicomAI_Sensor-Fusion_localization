@@ -31,6 +31,7 @@ setup(
             'lidar_cam_proj_node = sensors_processing.lidar_cam_proj:main',
             'drone_localization_node = sensors_processing.drone_localization:main',
             'instance_seg_node = sensors_processing.segmentation:main',
+            'extrinsic_tuner_node = sensors_processing.extrinsic_tuner:main',
         ],
     },
 )

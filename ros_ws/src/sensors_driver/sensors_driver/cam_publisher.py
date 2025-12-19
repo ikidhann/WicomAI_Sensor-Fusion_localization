@@ -16,7 +16,7 @@ class CameraPublisher(Node):
         super().__init__('cam_publisher_node')
 
         # ------------------------- PARAMETERS -------------------------
-        self.declare_parameter('camera_name', 'opencv')
+        self.declare_parameter('camera_name', 'logitech')
         self.declare_parameter('cam_source', 0)
         self.declare_parameter('frame_width', 1920)
         self.declare_parameter('frame_height', 1080)

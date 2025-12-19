@@ -9,4 +9,7 @@ alias ros_launch_sensors_sync='ros2 launch sensors_bringup sensors_sync_bringup.
 alias ros_launch_projection='ros2 launch sensors_bringup projection_bringup.launch.py'
 alias ros_launch_localization='ros2 launch sensors_bringup localization_bringup.launch.py'
 alias ros_launch_localization_rosbag='ros2 launch sensors_bringup localization_rosbag_bringup.launch.py'
+alias ros_launch_projection_rosbag='ros2 launch sensors_bringup projection_rosbag_bringup.launch.py'
+alias ros_launch_extrinsic_tuner='ros2 launch sensors_bringup extrinsic_tuner_bringup.launch.py'
+alias ros_record_sensors='ros2 bag record -o $rosbag_record_path /sync/velodyne_points /sync/raw_image /sync/cam_info'
 

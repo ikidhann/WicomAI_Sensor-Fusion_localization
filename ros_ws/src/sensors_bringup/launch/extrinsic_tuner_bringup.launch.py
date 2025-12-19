@@ -19,23 +19,15 @@ def generate_launch_description():
         parameters=[config_file]
     )
 
-    instance_seg_node = Node(
+    extrinsic_tuner_node = Node(
         package='sensors_processing',
-        executable='instance_seg_node',
-        name='instance_seg_node',
-        parameters=[config_file]
-    )
-
-    drone_localization_node = Node(
-        package='sensors_processing',
-        executable='drone_localization_node',
-        name='drone_localization_node',
+        executable='extrinsic_tuner_node',
+        name='extrinsic_tuner_node',
     )
 
     return LaunchDescription([
         LogInfo(msg="Starting static tf2..."),
         static_tf_node,
         LogInfo(msg="Starting sensor processing..."),
-        instance_seg_node,
-        drone_localization_node
+        extrinsic_tuner_node
     ])

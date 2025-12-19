@@ -26,10 +26,10 @@ def generate_launch_description():
         parameters=[config_file]
     )
 
-    drone_localization_node = Node(
+    lidar_cam_proj_node = Node(
         package='sensors_processing',
-        executable='drone_localization_node',
-        name='drone_localization_node',
+        executable='lidar_cam_proj_node',
+        name='lidar_cam_proj_node',
     )
 
     return LaunchDescription([
@@ -37,5 +37,5 @@ def generate_launch_description():
         static_tf_node,
         LogInfo(msg="Starting sensor processing..."),
         instance_seg_node,
-        drone_localization_node
+        lidar_cam_proj_node
     ])

@@ -1,4 +1,7 @@
 # WICOMAI CV Team - Drone Localization
+
+![System_Overview](assets/overview.png)
+
 ## Prerequisites
 
 1. Install Python >= 3.12

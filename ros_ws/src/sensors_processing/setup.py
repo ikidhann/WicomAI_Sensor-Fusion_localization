@@ -32,6 +32,7 @@ setup(
             'drone_localization_node = sensors_processing.drone_localization:main',
             'instance_seg_node = sensors_processing.segmentation:main',
             'extrinsic_tuner_node = sensors_processing.extrinsic_tuner:main',
+            'logi_cam_localization_node = sensors_processing.logi_cam_localization:main',
         ],
     },
 )

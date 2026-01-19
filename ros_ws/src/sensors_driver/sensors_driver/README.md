@@ -12,6 +12,6 @@ sudo apt install ros-jazzy-pcl-ros
 >-ros2 topic echo /clicked_point
 
 
-
+#update
 
 

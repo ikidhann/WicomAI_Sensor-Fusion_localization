@@ -1,0 +1,25 @@
+cam_publisher_node:
+  ros__parameters:
+    cam_source: 0
+    camera_name: ids
+    frame_width: 1440
+    frame_height: 1080
+    fps: 30.0
+    intrinsics_param:
+      distortion_model: plumb_bob
+      distortion_coefficients: [-0.169569, 13.414160, 0.017286, -0.005104, 0.000000]
+      camera_matrix: [
+        7916.581911, 0.000000, 787.677398,
+        0.000000, 7898.260488, 748.632915,
+        0.000000, 0.000000, 1.000000
+      ]
+      rectification_matrix: [
+        1.000000,0.000000,0.000000,
+        0.000000,1.000000,0.000000,
+        0.000000,0.000000,1.000000
+      ]
+      projection_matrix: [
+        7922.125977, 0.000000, 785.962748, 0.000000,
+        0.000000, 7885.412598, 750.501649, 0.000000,
+        0.000000, 0.000000, 1.000000, 0.000000
+      ]

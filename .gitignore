@@ -46,3 +46,13 @@ venv/
 bags/
 bags_preprocessed/
 calib-venv/
+ouster-venv/
+ouster_venv/
+ouster_data1/
+ouster_data2/
+ouster_data3/
+rosbag2_*/
+shared_rosbag/
+*.zip
+*.gv
+*.pdf

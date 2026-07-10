@@ -1,0 +1,77 @@
+import os
+from ament_index_python.packages import get_package_share_directory
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription, LogInfo
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.actions import Node 
+
+def generate_launch_description():
+    
+    venv_site_packages = os.path.join(
+        os.path.expanduser('~'),
+        'Documents/sensor_fusion/ros2-drone-localization/ouster-venv/lib/python3.12/site-packages'
+    )
+    python_path = venv_site_packages
+    if os.environ.get('PYTHONPATH'):
+        python_path = venv_site_packages + ':' + os.environ['PYTHONPATH']
+
+    bringup_pkg = get_package_share_directory('sensors_bringup')
+    driver_pkg = get_package_share_directory('sensors_driver')
+    ouster_ros_pkg = get_package_share_directory('ouster_ros')
+
+    config_file = os.path.join(
+        bringup_pkg, 'config', 'config.yaml'
+    )
+    configs = {'config_file': config_file}
+
+    ouster_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(ouster_ros_pkg, 'launch', 'driver.launch.py')
+        ),
+    )
+
+    camera_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(driver_pkg, 'launch', 'camera_logitech.launch.py')
+        ),
+        launch_arguments=configs.items()
+    )
+
+    static_tf_node = Node(
+        package='sensors_bringup',
+        executable='static_tf_broadcaster',
+        name='static_tf_broadcaster',
+        parameters=[config_file]
+    )
+
+    lidar_cam_sync_node = Node(
+        package='sensors_processing',
+        executable='lidar_cam_sync_node',
+        name='lidar_cam_sync_node',
+    )
+
+    lidar_cam_proj_node = Node(
+        package='sensors_processing',
+        executable='lidar_cam_proj_node',
+        name='lidar_cam_proj_node',
+    )
+
+    instance_seg_node = Node(
+        package='sensors_processing',
+        executable='instance_seg_node',
+        name='instance_seg_node',
+        parameters=[config_file],
+        additional_env={'PYTHONPATH': python_path}
+    )
+    
+    return LaunchDescription([
+        LogInfo(msg="Starting sensor drivers..."),
+        ouster_launch,
+        camera_launch,
+        LogInfo(msg="Starting static tf2..."),
+        static_tf_node,
+        LogInfo(msg="Starting sensor processing..."),
+        lidar_cam_sync_node,
+        lidar_cam_proj_node,
+        instance_seg_node
+    ])

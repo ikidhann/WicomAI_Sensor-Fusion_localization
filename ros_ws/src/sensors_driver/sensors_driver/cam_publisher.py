@@ -112,15 +112,30 @@ class CameraPublisher(Node):
         self.get_logger().info("IDS camera initialized successfully.")
 
 
+    # def _init_opencv_camera(self):
+    #     self.get_logger().info("Initializing OpenCV camera...")
+
+    #     self.cap = cv2.VideoCapture(self.cam_source_)
+    #     self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width_)
+    #     self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height_)
+    #     self.cap.set(cv2.CAP_PROP_FPS, self.fps_)
+
+    #     self.get_logger().info("OpenCV camera initialized.")
+
     def _init_opencv_camera(self):
         self.get_logger().info("Initializing OpenCV camera...")
-
-        self.cap = cv2.VideoCapture(self.cam_source_)
+        # add 
+        self.cap = cv2.VideoCapture(self.cam_source_, cv2.CAP_V4L2)
+        
+        self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.frame_width_)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.frame_height_)
         self.cap.set(cv2.CAP_PROP_FPS, self.fps_)
 
-        self.get_logger().info("OpenCV camera initialized.")
+        if not self.cap.isOpened():
+            self.get_logger().error("Failed to open OpenCV camera.")
+        else:
+            self.get_logger().info("OpenCV camera initialized.")
 
 
     def _load_camera_info(self):

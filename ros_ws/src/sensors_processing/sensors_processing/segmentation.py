@@ -67,6 +67,7 @@ class InstanceSegmentation(Node):
         cv_image = self.cv_bridge_.imgmsg_to_cv2(raw_image_msg, 'bgr8')
 
         try:
+            
             masked_img, masks = self._yolo_inference(cv_image)
 
             if masks is None:

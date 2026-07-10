@@ -1,0 +1,38 @@
+cam_publisher_node:
+  ros__parameters:
+    cam_source: 0
+    camera_name: logitech
+    frame_width: 1920
+    frame_height: 1080
+    fps: 30.0
+    intrinsics_param:
+      distortion_model: plumb_bob
+      distortion_coeff:
+        [0.173031, -0.279889, 0.001481, -0.006528, 0.000000]
+      camera_matrix:
+        [1161.813779, 0.000000, 948.845954, 0.000000, 1157.559926, 531.339864, 0.000000, 0.000000, 1.000000]
+      rectification_matrix:
+        [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+      projection_matrix:
+        [1166.413940, 0.000000, 944.000708, 0.000000, 0.000000, 1192.627686, 532.082566, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
+instance_seg_node:
+  ros__parameters:
+    model_path: model/hanging_model.pt
+    confidence_th: 0.55
+    target_class: 0
+static_tf_broadcaster:
+  ros__parameters:
+    T_lidar_camera: [
+     
+      #Data2  0.068126380443573, -0.01660734973847866, 0.053545981645584106,-0.4742514412204478, -0.5156109546329498, 0.5271246570865861, 0.4810099093262948
+      
+       0.020277607258978564, 0.03658924142983973, -0.0945841065101958,
+      -0.48278176460463185, -0.5093193574706256, 0.515196897292822, -0.4920241019409478
+
+      # Translation
+#[extrinsic_tuner_node-2]             0.020277607258978564, 0.03658924142983973, -0.0945841065101958, 
+#[extrinsic_tuner_node-2]             # Rotation (Quaternion)
+#[extrinsic_tuner_node-2]             -0.48278176460463185, -0.5093193574706256, 0.515196897292822, -0.4920241019409478
+
+      
+    ]

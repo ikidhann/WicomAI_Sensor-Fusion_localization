@@ -14,7 +14,10 @@ class LidarCameraProjection(Node):
         super().__init__('lidar_camera_proj_node')
 
         self.source_frame_ = 'velodyne'
+        #self.target_frame_ = 'camera_frame'
+        #add 
         self.target_frame_ = 'camera_optical_frame'
+
         self.tf_buffer_ = tf2_ros.Buffer()
         self.tf_listener_ = tf2_ros.TransformListener(self.tf_buffer_, self)
 

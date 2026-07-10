@@ -84,8 +84,8 @@ class DroneLocalization(Node):
                     cv2.circle(cv_image, (u, v), radius=2, color=(0, 255-depth_color, depth_color), thickness=-1)
 
             if len(distances) != 0:
-                # relative_distance = np.array(distances).min()
-                relative_distance = np.quantile(np.array(distances), 0.05)
+                relative_distance = np.array(distances).min()
+                #relative_distance = np.quantile(np.array(distances), 0.01)
              
                 # upper_bound = int(len(distances) * 0.05)
                 # distances = np.array(sorted(distances))

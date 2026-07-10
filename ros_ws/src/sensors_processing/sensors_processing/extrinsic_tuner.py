@@ -55,7 +55,9 @@ class ExtrinsicTuner(Node):
 
         self.ts_ = message_filters.ApproximateTimeSynchronizer(
             [self.sync_pcd_sub_, self.sync_image_sub_, self.sync_cam_info_sub_],
-            queue_size=4, slop=0.05
+            #queue_size=4, slop=0.05
+            #add
+            queue_size=30, slop=1.0
         )
         self.ts_.registerCallback(self.callback)
         self.bridge_ = CvBridge()
@@ -114,7 +116,8 @@ class ExtrinsicTuner(Node):
 
         pc_2d_hom = pc_2d_hom[:, filter]
         z_cam = z_cam[filter]
-        # N_in_front = pc_2d_hom.shape[1]
+        #add (original commnet off)
+        N_in_front = pc_2d_hom.shape[1]
 
         # Extract pixel coordinates
         u = (pc_2d_hom[0, :] / z_cam).astype(np.int32)
@@ -124,10 +127,17 @@ class ExtrinsicTuner(Node):
         filter = (u >= 0) & (u < img_w) & (v >= 0) & (v < img_h)
         projected_pcd = np.vstack([u, v, z_cam]).T
         projected_pcd = projected_pcd[filter, :]
-        # N_in_frame = projected_pcd.shape[0]
+        #add (original commnet off)
+        N_in_frame = projected_pcd.shape[0]
 
+        
         # log_msg = f'Points: Total={N_points} | InFront={N_in_front} | InFrame={N_in_frame}'
-
+        #Add
+        self.get_logger().info(
+            f'[DEBUG] Total={N_points} | InFront={N_in_front} | InFrame={N_in_frame} | '
+            f'u=[{u.min()},{u.max()}] v=[{v.min()},{v.max()}] img=[{img_w}x{img_h}]',
+            throttle_duration_sec=2.0
+        )
         return projected_pcd
     
     def callback(self, pcd_msg, raw_image_msg, cam_info_msg):
@@ -163,12 +173,15 @@ class ExtrinsicTuner(Node):
                 val = min(255, int(z * 20))
                 cv2.circle(display_img, (int(u), int(v)), 2, (0, 255 - val, val), -1)
 
-            cv2.putText(display_img, "[N] Next Frame | [S] Save | [ESC] Exit", (10, 30), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+            cv2.putText(display_img, "[N]Frame [S]Save [I/K]Pitch [J/L]Yaw [U/O]Roll [Q/E]Ty [A/D]Tx [Z/X]Tz", (10, 30),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
             
             cv2.imshow(self.window_name, display_img)
         
         key = cv2.waitKey(1)
+        step_T = 10   # 10mm per keypress
+        step_R = 10   # 1 degree per keypress
+
         if key == ord('n') or key == ord('N'):
             self.get_logger().info("Next Frame...")
             self.is_update_frame = True
@@ -177,6 +190,20 @@ class ExtrinsicTuner(Node):
             self._print_result(T_final)
         elif key == 27:
             raise KeyboardInterrupt
+        # Translation keys
+        elif key == ord('d'): cv2.setTrackbarPos('Tx', self.window_name, cv2.getTrackbarPos('Tx', self.window_name) + step_T)
+        elif key == ord('a'): cv2.setTrackbarPos('Tx', self.window_name, cv2.getTrackbarPos('Tx', self.window_name) - step_T)
+        elif key == ord('e'): cv2.setTrackbarPos('Ty', self.window_name, cv2.getTrackbarPos('Ty', self.window_name) + step_T)
+        elif key == ord('q'): cv2.setTrackbarPos('Ty', self.window_name, cv2.getTrackbarPos('Ty', self.window_name) - step_T)
+        elif key == ord('z'): cv2.setTrackbarPos('Tz', self.window_name, cv2.getTrackbarPos('Tz', self.window_name) + step_T)
+        elif key == ord('x'): cv2.setTrackbarPos('Tz', self.window_name, cv2.getTrackbarPos('Tz', self.window_name) - step_T)
+        # Rotation keys
+        elif key == ord('i'): cv2.setTrackbarPos('Pitch', self.window_name, cv2.getTrackbarPos('Pitch', self.window_name) + step_R)
+        elif key == ord('k'): cv2.setTrackbarPos('Pitch', self.window_name, cv2.getTrackbarPos('Pitch', self.window_name) - step_R)
+        elif key == ord('j'): cv2.setTrackbarPos('Yaw',   self.window_name, cv2.getTrackbarPos('Yaw',   self.window_name) - step_R)
+        elif key == ord('l'): cv2.setTrackbarPos('Yaw',   self.window_name, cv2.getTrackbarPos('Yaw',   self.window_name) + step_R)
+        elif key == ord('u'): cv2.setTrackbarPos('Roll',  self.window_name, cv2.getTrackbarPos('Roll',  self.window_name) - step_R)
+        elif key == ord('o'): cv2.setTrackbarPos('Roll',  self.window_name, cv2.getTrackbarPos('Roll',  self.window_name) + step_R)
 
 
 def main(args=None):

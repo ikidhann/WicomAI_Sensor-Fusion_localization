@@ -127,7 +127,7 @@ ros_launch_localization
 rviz2 -f velodyne
 ```
 
-<!-- - glfw error 65544: X11: Failed to open display :1
-xhost +local:root -->
+<!-- - glfw error 65544: X11: Failed to open display :1 --->
+xhost +local:root 
 
 

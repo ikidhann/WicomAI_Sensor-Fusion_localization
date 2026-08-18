@@ -29,11 +29,10 @@ def generate_launch_description():
         launch_arguments=configs.items()
     )
 
-    # TODO make new lidar-ids cam sync node (to change this node)
     lidar_cam_sync_node = Node(
         package='sensors_processing',
-        executable='lidar_cam_sync_node',
-        name='lidar_cam_sync_node',
+        executable='lidar_cam_ids_sync_node',
+        name='lidar_cam_ids_sync_node',
     )
 
     return LaunchDescription([

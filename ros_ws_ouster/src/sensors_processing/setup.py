@@ -33,9 +33,8 @@ setup(
             'instance_seg_node = sensors_processing.segmentation:main',
             'extrinsic_tuner_node = sensors_processing.extrinsic_tuner:main',
             'logi_cam_localization_node = sensors_processing.logi_cam_localization:main',
-            'radar_localization_node = sensors_processing.radar_localization:main'
-            
- 
+            'radar_localization_node = sensors_processing.radar_localization:main',
+            'lidar_cam_ids_sync_node = sensors_processing.lidar_cam_ids_sync:main',
         ],
     },
 )
